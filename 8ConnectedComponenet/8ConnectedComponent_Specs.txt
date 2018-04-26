@@ -1,0 +1,126 @@
+
+Project 3: You are to implement the  8-connected component algorithm 
+
+**************************************
+Language: Java
+Due date: Java soft copy:  2/20/2018 Tuesday before Midnight
+         early submission (+1) deadline 2/18/2018 before Midnight
+Due date: Java hard copy:  2/22/2017 Thursday in class
+
+*************************************
+
+I. Input: A binary image.
+	     should be in argv[0] 
+
+II. Outputs: 
+
+   (a) outFile1:   in argv[1] for:
+  
+	 1) Pretty print the result of the Pass-1 *and* the EQAry with proper captions
+		// proper captions -- can be unstood what they are.
+	 2) Pretty print the result of the Pass-2 *and* the EQAry with proper captions
+	 3) print EQAry after manage the EQAry 
+	 4) Pretty print the result of the Pass-3 and the EQAry with proper caption
+
+   (b) outFile2:   in argv[2] for:
+ 
+	 5) create an image file from the result of Pass-3 with header for
+		future processing.
+
+   (c) outFile3: in argv[3] for:
+	 (6) Output the connected component property using the format given below
+ 				// print the header of the CC image, follows by the 
+				// true numbers of the c.c. follows by the properties of 
+				// each c.c. components: For an example below in the method.
+
+
+*******************************
+III. Data structure:
+*******************************
+	- numRows (int)
+	- numCols (int)
+	- minVal (int)
+	- maxVal (int)
+	- newMin (int)
+	- newMax (int)
+ 
+	- newLabel (int) // initallize to 0
+
+	- zeroFramedAry (int **) a 2D array, need to dynamically allocate at run time
+			of size numRows + 2 by numCols + 2.
+
+	- NeighborAry[5](int) // during the first pass, p(i,j) looks at upper 3 and left neighbors, and 
+					// during the second pass, p(i,j) looks at bottom 3 and right neighbors and itself 
+	
+	- EQAry (int *) // a 1-D array, need to dynamically allocate at run time
+				// of size ( numRows * numCols) / 2 
+				// and initallize to EQAry[i] = i. 
+
+	- Property (1D struct) //a table that store the properties of connected components.
+				// need to dynamicaly allocate at run time.
+				// the size is the number of components + 1
+				// struct includes
+					- label
+					- numbpixels
+					- boundingBox : (minRow, minCol, maxRow, maxCol)
+			       
+    - methods:
+	- constructor(s) // need to dynamically allocate all arrays; 
+				and assign values to numRows,..., etc.
+
+	- zeroFramed // mirrow framing the image as taught in class
+	- loadImage // read from input file and load zeroFramedAry begin at (1,1)
+	- loadNeighbors // load the respective neighbors of given pixel(i,j)
+
+	- 8ConnectCC_Pass1  // as taught in class
+	- 8ConnectCC_Pass2	// as taught in class
+	- 8ConnectCC_Pass3  // In the pass3, you will use the EQAry to relable the components 
+					// as well as compute the property of each c.c.
+	- updateEQAry
+	- manageEQAry	  // manage the EQAry so to findout true number of connected components..
+	- printCCProperty // print the header of the CC image, follows by the 
+				  // true numbers of the c.c. follows by the properties of 
+				  // each c.c. components: For example
+
+				45 40 0 8  // CC image header
+				8   // there are a total of 8 CC
+				1   // CC label #1
+				87	// 87 pixels in CC label #1
+				4  9  // upper left most pixel of the bounding box of CC #1
+				35  39  // lower right most pixel of the bounding box
+				:
+				:
+
+			
+	- prettyPrint
+	
+      
+*******************************
+III. Algorithms 
+*******************************
+  
+step 0: read the image header
+	   dynamically allocate zeroFramedAry and all other arrays
+
+step 1: load the input image onto zeroFramedAry
+
+
+step 2: - 8ConnectCC_Pass1 // as taught in class
+	   - prettyprint the result of pass1// with proper caption
+	   - print EQAry	// with index up to newLable with proper caption
+
+step 3: - 8ConnectCC_Pass2 // as taught in class
+	   - prettyprint the result of pass2// with caption
+	   - print EQAry // with index up to newLable with caption
+
+step 4:  - manageEQAry // as taught in class. 
+ 	   - print EQAry // with index up to newLable with caption
+
+step 5: - 8ConnectCC_Pass3  // In the pass3, you will use the EQAry to relabel the components;
+					// keep track the newMin newMax 
+					// as well as compute the property of each c.c.
+					// and store the c. c.  properties 
+					
+	   - prettyprint the result of pass3 of the connected c.c.  // with caption
+	   - Output the result of pass3 to outFile2 with updated image header
+         - print the propertis of the connected c.c. // with proper caption

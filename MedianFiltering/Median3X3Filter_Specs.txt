@@ -1,0 +1,93 @@
+Project 2.2: You are to write the image processing method: 3x3 median filter.
+
+*** What do you have to do (C++):
+    -  Implement 3x3 median filter using the input data1 and data2 as given in 2.1.
+	  and run your 3x3 median filter program two times with the two data files and output 
+		to Median3X3Out1.txt and Median3X3Out2.txt
+	
+   - compute the histogram of your Median3X3Out1.txt and Median3X3Out2.txt
+   - threshold Median3X3Out.txt using threshold value 7 and 8 (using cosole input) 
+	and output the threshold result to Median3X3Out1_thr_n.txt and Median3X3Out2_thr_n.txt
+   - prettyPrint Median3X3Out1_thr_n.txt and Median3X3Out2_thr_n.txt
+
+*** your hard copies to turn in should include:
+   - cover page
+   - *Only* the source code of your 3x3 median filter program
+   - Print the prettyPrint of your Median3X3Out1.txt and Median3X3Out2.txt
+   - Print the prettyPrint of your Median3X3Out1_thr_n.txt and Median3X3Out2_thr_n.txt
+
+**************************************
+Language: C++
+Due date: C++ soft copy: 2/13/2013 Tuesday before Midnight
+Due date: C++ hard copy: 2/15/2017 Thursday in class
+
+*************************************
+
+I. Input (argv[ ]): a txt file representing a grey-scale image with header.
+	//** the name of the input file to be in argv[0] for Java.
+
+II. Output: //** as describe in the above. 
+
+	
+*******************************
+III. Data structure:
+*******************************
+     
+	- numRows (int)
+	- numCols (int)
+	- minVal (int)
+	- maxVal (int)
+	- newMin (int)
+	- newMax (int)
+ 
+	- mirrorFramedAry (int **) a 2D array, need to dynamically allocate at run time
+			of size numRows + 2 by numCols + 2.
+
+	- tempAry (int **) a 2D array, need to dynamically allocate at run time
+			of size numRows + 2 by numCols + 2.
+
+	- neighborAry[9](int) 1-D array for storing the 3 x 3 neighbors of pixel (i,j) 
+	
+    - methods:
+	- constructor(s) // need to dynamically allocate the two (2-D) arrays 
+				and assign values to numRows,..., etc.
+	- mirrorFramed // mirrow framing the image as taught in class
+	- loadImage // read from input file and load onto mirrorFramedAry
+	- loadNeighbors // load the 3 x 3 neighbors of given pixel(i,j)onto neighborAry
+
+	- Median3X3
+	      
+
+*******************************
+III. 3 by 3 median filter algorithm 
+*******************************
+  
+step 0: - open the input file and output file
+	  - read the image header, the four numbers
+	  - dynamically allocate mirrorFramedAry 
+	  - dynamically alloicate tempAry
+
+step 1: read the input file and load onto mirrowframeAry begin at [1,1]
+
+step 2: mirrowFramed the mirrorFramedAr 
+
+step 3: process the MirrorframedAry, from left to right and top to bottom
+	  begin at (1, 1)
+
+	  - neighborAry <- loadNeighbors // get mirrorframedAry[i,j]'s 3 X 3 neighborhoods  
+	  
+	  - tempAry[i,j] <-- sort neightborAry using selection sort algorithm,
+					stop after the fifth smallest item is found,
+				     then return the fifth item
+	  
+	  - keep tracking the newMin and newMax of tempAry
+
+step 4: repeat step 3 until all pixels are processed
+
+step 5: output the image header (numRows, numCols, newMin, newMax)  to outfile 
+
+step 6: output the tempAry, begin at [1,1], to outfile 
+	   
+step 7: close input and output files
+
+	
