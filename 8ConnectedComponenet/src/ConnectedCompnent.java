@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class Main {
+public class ConnectedComponenet {
 
 	private class Property {
 		int label, numbPixels, minRow, minCol, maxRow, maxCol;
@@ -78,7 +78,7 @@ public class Main {
 	PrintWriter outfile, outfile2, outfile3;
 	Property[] components;
 
-	Main(String infilename, String outfilename, String outfilename2, String outfilename3) throws IOException {
+	ConnectedComponenet(String infilename, String outfilename, String outfilename2, String outfilename3) throws IOException {
 		infile = new Scanner(new File(infilename));
 		outfile = new PrintWriter(new File(outfilename));
 		outfile2 = new PrintWriter(new File(outfilename2));
